@@ -10,6 +10,7 @@ import rateLimit from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { loggerOptions } from 'src/common/configs/log.config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -44,6 +45,14 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  const options = new DocumentBuilder()
+    .setTitle('NestJS Starter')
+    .setDescription('Simple starter application for NestJS projects')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('/docs', app, document);
 
   const configService = app.get(ConfigService);
   await app.listen(configService.get<number>('PORT'));
