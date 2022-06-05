@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { API_ENDPOINTS } from 'src/common/utils/controller-paths';
+import { API_ENDPOINTS } from './common/utils/controller-paths';
 import { AppService } from './app.service';
 
 @Controller({

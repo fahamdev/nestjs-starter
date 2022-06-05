@@ -1,5 +1,5 @@
 export const API_ENDPOINTS = {
-  BASE: 'base',
+  BASE: 'root',
   USERS: {
     BASE: 'users',
   },
