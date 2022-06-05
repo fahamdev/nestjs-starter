@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import HttpLoggerMiddleware from 'src/common/middlewares/http-logger.middleware';
 import { configValidationSchema } from 'src/common/schemas/config.schema';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -14,4 +15,8 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(HttpLoggerMiddleware).forRoutes('*');
+  }
+}
