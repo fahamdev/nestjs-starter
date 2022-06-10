@@ -5,6 +5,7 @@ import HttpLoggerMiddleware from 'src/common/middlewares/http-logger.middleware'
 import { configValidationSchema } from 'src/common/schemas/config.schema';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AppService } from './app.service';
         autoLoadEntities: true,
       }),
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
